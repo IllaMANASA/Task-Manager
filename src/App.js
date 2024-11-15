@@ -9,7 +9,6 @@ function App() {
   const [priority, setPriority] = useState("High");
   const [searchTerm, setSearchTerm] = useState(""); 
   const [errorMessage, setErrorMessage] = useState("");
-  const [err, setErrMessage] = useState("");
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
@@ -86,11 +85,6 @@ function App() {
   };
 
   const sortTasks = () => {
-    if (!newTask.trim()){
-      setErrMessage("Please enter a task.");
-      return;
-    }
-  
     const sortedTasks = [...todoList].sort((a, b) => {
       const priorityOrder = { "High": 1, "Medium": 2, "Low": 3 };
       return priorityOrder[a.priority] - priorityOrder[b.priority];
@@ -116,8 +110,6 @@ function App() {
         <button onClick={sortTasks} className="priority-button">Sort by Priority</button>
       </div>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      {err && <p style={{ color: "red" }}>{err}</p>}
-
       {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
 
       <div className="search">
